@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dan Motors</title>
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        nav {
+            background-color: #000;
+            color: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav h1 {
+            font-size: 2rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 10px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #444;
+            border-radius: 5px;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle div {
+            width: 30px;
+            height: 3px;
+            background-color: #fff;
+            margin: 6px 0;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background-color: #000;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                padding: 0;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        header {
+            background: linear-gradient(to right, #000, #333);
+            color: #fff;
+            padding: 80px 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0 0 20px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        section {
+            padding: 50px 30px;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            padding: 30px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        footer form {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        footer form label {
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        footer form input, footer form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        footer form button {
+            background-color: #0056b3;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        footer form button:hover {
+            background-color: #00408a;
+        }
+
+        footer p {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>Dan Motors</h1>
+        <div class="menu-toggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul id="menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#carros-esportivos">Carros Esportivos</a></li>
+            <li><a href="#lancamentos">Lançamentos</a></li>
+            <li><a href="#suporte">Suporte</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </nav>
+
+    <header id="home">
+        <h1>Venha comprar o carro dos seus sonhos!</h1>
+        <p>A Dan Motors é a sua mais nova referência no mercado de vendas de carros. Com um compromisso inabalável de oferecer qualidade e confiança, a Dan Motors se dedica a proporcionar aos clientes a melhor experiência na compra de veículos. Nossa seleção inclui uma variedade de modelos, desde carros compactos para o dia a dia até veículos de luxo que oferecem o máximo de conforto e performance.</p>
+    </header>
+
+    <section id="carros-esportivos">
+        <h2>Carros Esportivos</h2>
+
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="img/gle400.webp" alt="Mercedes Gle400">
+                <div class="overlay">Mercedes Gle400</div>
+            </div>
+            <div class="gallery-item">
+                <img src="img/2024-Mercedes-AMG-GT-63-001.jpg" alt="Mercedes AMG GT63">
+                <div class="overlay">Mercedes AMG GT63</div>
+            </div>
+            <div class="gallery-item">
+                <img src="img/mercedes-a200.jpg" alt="Mercedes A200">
+                <div class="overlay">Mercedes A200</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="lancamentos">
+        <h2>Lançamentos</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi explicabo error, ad deserunt qui ab eaque. Tenetur earum alias sunt quisquam eum eaque laudantium. Perferendis nulla earum quia repellendus provident.</p>
+    </section>
+
+    <footer id="suporte">
+        <h2>Suporte</h2>
+        <form method="GET" action="">
+            <label for="nome">Nome</label>
+            <input type="text" name="Nome" id="nome" required>
+            <label for="email">Email</label>
+            <input type="email" name="Email" id="email" required>
+            <label for="comentario">Comentário</label>
+            <textarea rows="5" name="Comentário" id="comentario" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+        <p>Feito por Daniel Silva</p>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menu = document.getElementById('menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
